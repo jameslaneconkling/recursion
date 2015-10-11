@@ -67,16 +67,15 @@ var tag = function(fn){
 
   var callId = 0;
 
-  var counter = function(){
-    return callId++;
-  };
+  var counter = function(){ return callId++; };
 
-  var wrappedFn = function(){
+  var proxy = function(){
     var input = Array.prototype.slice.apply(arguments),
         callId = counter(),
         output = fn.apply(callId, input);
 
     // console.log('ID:', callId, 'arguments:', input);
+    // console.log(fn.toString());
 
     _callStack[callId] = {
       input: input,
@@ -87,11 +86,11 @@ var tag = function(fn){
     return output;
   };
 
-  wrappedFn.getCallStack = function(){
+  proxy.getCallStack = function(){
     return _callStack;
   };
 
-  return wrappedFn;
+  return proxy;
 }
 
 
@@ -100,7 +99,7 @@ var taggedRecurseDown = tag(recurseDown);
 recurseDown = taggedRecurseDown;
 
 taggedRecurseDown([1,5,4,7,8]);
-// console.log(taggedRecurseDown.getCallStack());
+console.log(taggedRecurseDown.getCallStack());
 
 
 // up
