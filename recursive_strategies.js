@@ -62,7 +62,7 @@ var recurseDown = function(collection, solution){
 
 
 // tag function invocation, resolution, inputs and outputs to map recursive structure
-var Tag = function(fn){
+var tag = function(fn){
   var _callStack = {};
 
   var stackCount = 0;
@@ -95,14 +95,14 @@ var Tag = function(fn){
 
 
 // down
-var taggedRecurseDown = Tag(recurseDown);
+var taggedRecurseDown = tag(recurseDown);
 recurseDown = taggedRecurseDown;
 
 taggedRecurseDown([1,5,4,7,8]);
 
 
 // up
-var taggedRecurseUp = Tag(recurseUp);
+var taggedRecurseUp = tag(recurseUp);
 recurseUp = taggedRecurseUp;
 
 taggedRecurseUp([1,5,4,7,8]);
