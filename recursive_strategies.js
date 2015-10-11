@@ -65,17 +65,18 @@ var recurseDown = function(collection, solution){
 var tag = function(fn){
   var _callStack = {};
 
-  var stackCount = 0;
+  var callId = 0;
 
   var counter = function(){
-    return ++stackCount;
+    return callId++;
   };
 
   var wrappedFn = function(){
     var input = Array.prototype.slice.apply(arguments),
         callId = counter(),
-        output = fn.apply(null, input);
+        output = fn.apply(callId, input);
 
+    // console.log('ID:', callId, 'arguments:', input);
 
     _callStack[callId] = {
       input: input,
@@ -99,10 +100,11 @@ var taggedRecurseDown = tag(recurseDown);
 recurseDown = taggedRecurseDown;
 
 taggedRecurseDown([1,5,4,7,8]);
+// console.log(taggedRecurseDown.getCallStack());
 
 
 // up
-var taggedRecurseUp = tag(recurseUp);
-recurseUp = taggedRecurseUp;
+// var taggedRecurseUp = tag(recurseUp);
+// recurseUp = taggedRecurseUp;
 
-taggedRecurseUp([1,5,4,7,8]);
+// taggedRecurseUp([1,5,4,7,8]);
