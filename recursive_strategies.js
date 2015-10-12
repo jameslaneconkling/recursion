@@ -46,7 +46,7 @@ var recurseUp = function(collection){
     this has the added benefit of being tail recursive
  */
 var recurseDown = function(collection, solution){
-  var solution = solution || 0;
+  solution = solution || 0;
   if(collection.length === 0){ return solution; }
   return recurseDown(collection.slice(1), solution + collection[0]);
 }
@@ -60,8 +60,60 @@ var recurseDown = function(collection, solution){
 // console.log('recurse up: ', up);
 // console.log('recurse down: ', down);
 
+/*  DEPTH FIRST TREE RECURSE
 
-// tag function invocation, resolution, inputs and outputs to map recursive structure
+    useful for generating permutations or combinations or
+ */
+var depthTreeRecurse = function(letters, length, word, solution){
+  // generate all possible word combinations of length 'length' using all characters in the 'letters' array,
+  // using each letter any number of times (0+)
+  word = word || '';
+  solution = solution || [];
+
+  if(word.length === length){
+    return solution.concat(word);
+  }
+
+  letters.forEach(function(letter, idx){
+    solution = depthTreeRecurse(letters, length, word + letter, solution);
+  });
+
+  return solution;
+}
+
+// var combinations = breadthTreeRecurse(['a','b','c','d'], 2);
+// console.log(combinations);
+
+
+/*  BREADTH FIRST TREE RECURSE
+
+    useful for generating permutations or combinations
+ */
+var breadthTreeRecurse = function(letters, length, word, solution){
+  // generate all possible word combinations of length 'length' using all characters in the 'letters' array,
+  // using each letter any number of times (0+)
+  word = word || '';
+  solution = solution || [];
+
+  if(word.length === length){
+    return solution.concat(word);
+  }
+
+  letters.forEach(function(letter, idx){
+    solution = breadthTreeRecurse(letters, length, word + letter, solution);
+  });
+
+  return solution;
+}
+
+var combinations = breadthTreeRecurse(['a','b','c','d'], 2);
+console.log(combinations);
+
+
+/*  TAG
+
+    tag function invocation, resolution, inputs and outputs to map recursive structure
+ */
 var tag = function(fn){
   var _callStack = {};
 
@@ -95,11 +147,11 @@ var tag = function(fn){
 
 
 // down
-var taggedRecurseDown = tag(recurseDown);
-recurseDown = taggedRecurseDown;
+// var taggedRecurseDown = tag(recurseDown);
+// recurseDown = taggedRecurseDown;
 
-taggedRecurseDown([1,5,4,7,8]);
-console.log(taggedRecurseDown.getCallStack());
+// taggedRecurseDown([1,5,4,7,8]);
+// console.log(taggedRecurseDown.getCallStack());
 
 
 // up
