@@ -64,21 +64,21 @@ var recurseDown = function(collection, solution){
 
     useful for generating permutations or combinations or
  */
-var depthTreeRecurse = function(letters, length, word, solution){
+var depthTreeRecurse = function(letters, length, word, words){
   // generate all possible word combinations of length 'length' using all characters in the 'letters' array,
   // using each letter any number of times (0+)
   word = word || '';
-  solution = solution || [];
+  words = words || [];
 
   if(word.length === length){
-    return solution.concat(word);
+    return words.concat(word);
   }
 
   letters.forEach(function(letter, idx){
-    solution = depthTreeRecurse(letters, length, word + letter, solution);
+    words = depthTreeRecurse(letters, length, word + letter, words);
   });
 
-  return solution;
+  return words;
 }
 
 // var combinations = breadthTreeRecurse(['a','b','c','d'], 2);
@@ -87,27 +87,11 @@ var depthTreeRecurse = function(letters, length, word, solution){
 
 /*  BREADTH FIRST TREE RECURSE
 
-    useful for generating permutations or combinations
+    BFS is not traditionally a recursive algorithm, as it uses a queue (rather than a stack)
+    and the order functions are called is determined by the call stack
+    a recursive BFS algorithm can be implemented via Iterative deepening depth-first search:
+    https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search
  */
-var breadthTreeRecurse = function(letters, length, word, solution){
-  // generate all possible word combinations of length 'length' using all characters in the 'letters' array,
-  // using each letter any number of times (0+)
-  word = word || '';
-  solution = solution || [];
-
-  if(word.length === length){
-    return solution.concat(word);
-  }
-
-  letters.forEach(function(letter, idx){
-    solution = breadthTreeRecurse(letters, length, word + letter, solution);
-  });
-
-  return solution;
-}
-
-var combinations = breadthTreeRecurse(['a','b','c','d'], 2);
-console.log(combinations);
 
 
 /*  TAG
