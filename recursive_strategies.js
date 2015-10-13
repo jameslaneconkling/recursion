@@ -60,6 +60,7 @@ var recurseDown = function(collection, solution){
 // console.log('recurse up: ', up);
 // console.log('recurse down: ', down);
 
+
 /*  DEPTH FIRST TREE RECURSE
 
     useful for generating permutations or combinations or
@@ -81,8 +82,8 @@ var depthTreeRecurse = function(letters, length, word, words){
   return words;
 }
 
-// var combinations = breadthTreeRecurse(['a','b','c','d'], 2);
-// console.log(combinations);
+var combinations = depthTreeRecurse(['a','b','c','d'], 2);
+console.log(combinations);
 
 
 /*  BREADTH FIRST TREE RECURSE
@@ -97,6 +98,8 @@ var depthTreeRecurse = function(letters, length, word, words){
 /*  TAG
 
     tag function invocation, resolution, inputs and outputs to map recursive structure
+    tag works by creating a proxy wrapper function that calls the input function, recording
+    that function's input and output and a unique id for each recursive call it makes to itself
  */
 var tag = function(fn){
   var _callStack = {};
