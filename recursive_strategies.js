@@ -34,7 +34,7 @@ var impureRecurse = function(collection){
 var recurseUp = function(collection){
   if(collection.length === 0){ return 0; }
   return collection[0] + recurseUp(collection.slice(1));
-}
+};
 
 
 /*  RECURSE DOWN
@@ -49,7 +49,7 @@ var recurseDown = function(collection, solution){
   solution = solution || 0;
   if(collection.length === 0){ return solution; }
   return recurseDown(collection.slice(1), solution + collection[0]);
-}
+};
 
 // var data = [1,5,4,7,8];
 // var impure = impureRecurse(data);
@@ -75,14 +75,12 @@ var depthTreeRecurse = function(letters, length, word, words){
     return words.concat(word);
   }
 
-  letters.forEach(function(letter, idx){
-    words = depthTreeRecurse(letters, length, word + letter, words);
-  });
+  return letters.reduce(function(words, letter, idx){
+    return depthTreeRecurse(letters, length, word + letter, words);
+  }, words);
+};
 
-  return words;
-}
-
-var combinations = depthTreeRecurse(['a','b','c','d'], 2);
+var combinations = depthTreeRecurse(['a','b','c','d'], 3);
 console.log(combinations);
 
 
@@ -130,7 +128,7 @@ var tag = function(fn){
   };
 
   return proxy;
-}
+};
 
 
 // down
