@@ -53,9 +53,29 @@ var trace = function(fn) {
           input = JSON.stringify(stack.input),
           output = JSON.stringify(stack.output);
 
-      console.log('Callstack', id, '. Parent', parent, '. Input:', input, 'Output:', output);
+      console.log('Callstack', id, 'Parent', parent, '\n\tInput:', input, '\n\tOutput:', output);
     }
+  };
+
+  recursiveDecorator.callStack2GraphJSON = function() {
+    return Object.keys(_callStack).reduce(function(graph, key, idx) {
+      graph.nodes.push({
+        id: +key,
+        input: _callStack[key].input,
+        output: _callStack[key].output
+      });
+
+      if (_callStack[key].parent !== -1) {
+        graph.edges.push({
+          source: _callStack[key].parent,
+          target: +key
+        });
+      }
+      return graph;
+    }, {nodes: [], edges: []});
   };
 
   return recursiveDecorator;
 };
+
+module.exports = trace;

@@ -10,10 +10,10 @@ var capitalize = function(collection) {
   return [first.toUpperCase()].concat(capitalize(rest));
 };
 
-var tCapitalize = tag(capitalize, 1);
-capitalize = tCapitalize;
+// var tCapitalize = trace(capitalize);
+// capitalize = tCapitalize;
 
-capitalize(['a', 'c', 'd', 'f']);
+// capitalize(['a', 'c', 'd', 'f']);
 
 
 //////////////////////////////////////////
@@ -29,13 +29,33 @@ var zip = function(arr1, arr2) {
   return first.concat(zip(restArr1, restArr2));
 };
 
-var tZip = tag(zip, 2);
-zip = tZip;
+// var tZip = trace(zip);
+// zip = tZip;
 
-zip([1,2,3], ['a', 'b', 'c']);
+// zip([1,2,3], ['a', 'b', 'c']);
 
 
 //////////////////////////////////////////
-var treeRecurse = function() {
+var cartesianProduct = function(letters, length, word, words){
+  // generate all possible word combinations of length 'length' using all characters in the 'letters' array,
+  // using each letter any number of times (0+)
+  word = word || '';
+  words = words || [];
 
+  if(word.length === length){
+    return words.concat(word);
+  }
+
+  return letters.reduce(function(words, letter, idx){
+    return cartesianProduct(letters, length, word + letter, words);
+  }, words);
 };
+
+// var tCartesianProd = trace(cartesianProduct);
+// cartesianProduct = tCartesianProd;
+
+// cartesianProduct(['a','b','c','d'], 3);
+
+exports.capitalize = capitalize;
+exports.zip = zip;
+exports.cartesianProduct = cartesianProduct;
