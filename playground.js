@@ -27,6 +27,7 @@ var functions = require('/Users/james/Documents/Projects/recursion/functions');
 // tZip.printCallStack()
 // tZip.callStack2GraphJSON();
 
+
 var cartesianProduct = function(letters, length, word, words){
   // generate all possible word combinations of length 'length' using all characters in the 'letters' array,
   // using each letter any number of times (0+)
@@ -46,6 +47,7 @@ var tCartesianProd = trace(cartesianProduct);
 cartesianProduct = tCartesianProd;
 var result = cartesianProduct(['a','b','c'], 3);
 
-console.log(result);
 tCartesianProd.printCallStack()
 tCartesianProd.callStack2GraphJSON();
+
+

@@ -1,0 +1,22 @@
+{
+  "name": "visual-recursion",
+  "version": "1.0.0",
+  "description": "An exploration and visualization of recursive strategies.",
+  "main": "functions.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jameslaneconkling/recursion.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jameslaneconkling/recursion/issues"
+  },
+  "homepage": "https://github.com/jameslaneconkling/recursion#readme",
+  "dependencies": {
+    "d3": "^3.5.16"
+  }
+}
