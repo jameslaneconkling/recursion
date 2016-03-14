@@ -10,10 +10,12 @@
  * var tracedFn = trace(recursiveFn);
  * recursiveFn = tracedFn; // overwrite reference to recursiveFn
  *                         // this funny trick only works if recursiveFn is defined in the same scope as this
- *                         // assignment that overwrites it.  I.e. if it is imported as a module, recursiveFn's internal
- *                         // calls to itself will continue to point to the original function, rather than to
- *                         // the trace decorator
- *                         // Note: the same outcome could be achieved, more or less, with the Y combinator
+ *                         // assignment that overwrites it.  I.e. if it is imported as a module or otherwise defined w/i a clojure,
+ *                         // recursiveFn's internal calls to itself will continue to point to the original function, rather than to
+ *                         // the trace decorator.
+ *                         //
+ *                         // Note: the same outcome could be achieved, more or less (w/o needing to overwrite the original fn reference, and
+ *                         // w/o the restrictions on closures, with the Y combinator
  *                         // http://matt.might.net/articles/implementation-of-recursive-fixed-point-y-combinator-in-javascript-for-memoization/
  * tracedFn(input);
  * tracedFn.printCallStack();
