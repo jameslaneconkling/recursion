@@ -1,12 +1,4 @@
-(function(d3) {
+var d3 = require('d3');
+var trace = require('./recursive-decorator');
 
-var app = {
-  init: function() {
-
-  }
-};
-
-window.app = app;
-app.init();
-
-}(d3));
+console.log('d3', d3.version);

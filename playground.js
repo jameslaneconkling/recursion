@@ -47,7 +47,7 @@ var tCartesianProd = trace(cartesianProduct);
 cartesianProduct = tCartesianProd;
 var result = cartesianProduct(['a','b','c'], 3);
 
-tCartesianProd.printCallStack()
+tCartesianProd.printCallStack();
 tCartesianProd.callStack2GraphJSON();
 
 
