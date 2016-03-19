@@ -59,3 +59,19 @@ var cartesianProduct = function(letters, length, word, words){
 exports.capitalize = capitalize;
 exports.zip = zip;
 exports.cartesianProduct = cartesianProduct;
+
+
+//////////////////////////////////////////
+function filterString(input, filter) {
+  input = Array.isArray(input) ? input : input.split('');
+  filter = Array.isArray(filter) ? filter : filter.split('');
+
+  if (filter.length === 0) {
+    return true;
+  }
+
+  let filterLetter = filter[0];
+  let filterIdx = input.indexOf(filterLetter);
+
+  return filterIdx !== -1 && filterString(input.slice(filterIdx + 1, input.length), filter.slice(1, filter.length));
+}
