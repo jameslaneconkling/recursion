@@ -56,6 +56,24 @@ var cartesianProduct = function(letters, length, word, words){
 
 // cartesianProduct(['a','b','c','d'], 3);
 
+
+//////////////////////////////////////////
+function curry(fn, ...curriedArgs) {
+  return (...args) => {
+    return fn.length > curriedArgs.length + args.length ?
+      curry(fn, ...curriedArgs, ...args) :
+      fn(...curriedArgs, ...args);
+  }
+}
+
+// log(curry((a,b,c) => a + b + c, 1)(2,3));
+// log(curry((a,b,c) => a + b + c)(1,2,3));
+// log(curry((a,b,c) => a + b + c)(1)(2,3));
+// log(curry((a,b,c) => a + b + c)(1,2)(3));
+// log(curry((a,b,c) => a + b + c)(1)(2)(3));
+
+
 exports.capitalize = capitalize;
 exports.zip = zip;
 exports.cartesianProduct = cartesianProduct;
+exports.curry = curry;
