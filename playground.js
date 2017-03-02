@@ -7,27 +7,30 @@ var functions = require('/Users/james/Documents/Projects/recursion/functions');
 // var zip = functions.zip;
 // var cartesianProduct = functions.cartesianProduct;
 
-// var zip = function(arr1, arr2) {
-//   if (arr1.length === 0) {
-//     return [];
-//   }
+var zip = function(arr1, arr2) {
+  if (arr1.length === 0) {
+    return [];
+  }
 
-//   var first = [[arr1[0], arr2[0]]],
-//       restArr1 = arr1.slice(1, arr1.length),
-//       restArr2 = arr2.slice(1,arr2.length);
+  var first = [[arr1[0], arr2[0]]],
+      restArr1 = arr1.slice(1, arr1.length),
+      restArr2 = arr2.slice(1,arr2.length);
 
-//   return first.concat(zip(restArr1, restArr2));
-// };
+  return first.concat(zip(restArr1, restArr2));
+};
 
-// var tZip = trace(zip);
-// zip = tZip;
-// var result = zip([1,2,3], ['a', 'b', 'c']);
+var tZip = trace(zip);
+zip = tZip;
+var result = zip([1,2,3], ['a', 'b', 'c']);
 
-// console.log(result);
-// tZip.printCallStack()
-// tZip.callStack2GraphJSON();
+console.log(result);
+tZip.printCallStack()
+tZip.callStack2GraphJSON();
 
 
+/**********************************************/
+/**********************************************/
+/**********************************************/
 var cartesianProduct = function(letters, length, word, words){
   // generate all possible word combinations of length 'length' using all characters in the 'letters' array,
   // using each letter any number of times (0+)
@@ -38,7 +41,7 @@ var cartesianProduct = function(letters, length, word, words){
     return words.concat(word);
   }
 
-  return letters.reduce(function(words, letter, idx){
+  return letters.reduce(function(words, letter){
     return cartesianProduct(letters, length, word + letter, words);
   }, words);
 };
@@ -49,5 +52,32 @@ var result = cartesianProduct(['a','b','c'], 3);
 
 tCartesianProd.printCallStack();
 tCartesianProd.callStack2GraphJSON();
+
+
+/**********************************************/
+/**********************************************/
+/**********************************************/
+// var
+// cartesianProduct implementation 2, based on Redu's answer on http://stackoverflow.com/questions/12303989/cartesian-product-of-multiple-arrays-in-javascript
+// TODO - make tail recursive
+var xprod = (next, ...rest) => {
+  return rest.length > 0 ?
+    next.reduce((product, item) => {
+      return [
+        ...product,
+        ...xprod(...rest)
+          .map(recursiveItems => rest.length > 1 ? [item, ...recursiveItems] : [item, recursiveItems])
+        ];
+    }, []) :
+    next;
+};
+var a = ['a', 'b', 'c'];
+var b = [1,2,3];
+var c = [[9],[8],[7]];
+
+console.log(JSON.stringify(xprod(a, b, c)));
+
+
+
 
 
