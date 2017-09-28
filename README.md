@@ -1,11 +1,11 @@
 ## Recursive Strategies
 
-An exploration and visualization of recursive strategies.
+A visualization of recursive strategies.
 
 Strategies include:
 
 * linear and tree-based
-* upwards and downwards
+* upwards, downwards, and cps
 * pure and impure
 
 ### TODO
