@@ -7,11 +7,14 @@
 var impureRecurse = function(collection){
   var sum = 0;
 
-  function recurse(collection){
-    if(collection.length === 0){ return; }
-    sum += collection[0];
-    recurse(collection.slice(1));
+  function recurse([head, ...rest]){
+    if (!head) {
+      return;
+    }
+    sum += head;
+    recurse(rest);
   }
+
   recurse(collection);
 
   return sum;
@@ -26,9 +29,12 @@ var impureRecurse = function(collection){
  *
  * this allows us to avoid modifying the function's arguments
  */
-var recurseUp = function(collection){
-  if(collection.length === 0){ return 0; }
-  return collection[0] + recurseUp(collection.slice(1));
+var recurseUp = function([head, ...rest]){
+  if (!head) {
+    return 0;
+  }
+
+  return head + recurseUp(rest);
 };
 
 
@@ -41,12 +47,28 @@ var recurseUp = function(collection){
  *
  * this has the added benefit of being tail recursive
  */
-var recurseDown = function(collection, solution){
-  solution = solution || 0;
-  if(collection.length === 0){ return solution; }
-  return recurseDown(collection.slice(1), solution + collection[0]);
+var recurseDown = function([head, ...rest], solution = 0){
+  if (!head) {
+    return solution;
+  }
+
+  return recurseDown(rest, solution + head);
 };
 
+/*
+ * RECURSE VIA CPS [continuation passing style]
+ *
+ * build a nested function to perform calculations as function recurses downwards.
+ * like RECURSE UP, does not compute on the way down, but has the benefit of being tail recursive
+ */
+
+var recurseCPS = function([head, ...rest], cont = x => x) {
+  if (!head) {
+    return cont(0);
+  }
+  
+  return recurseCPS(rest, x => cont(x + head));
+}
 
 /*
  * DEPTH FIRST TREE RECURSE
